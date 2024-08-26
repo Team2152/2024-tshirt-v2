@@ -4,21 +4,29 @@
 
 package frc.robot.subsystems;
 
+import java.util.function.IntSupplier;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.Constants.BarrelConstants;
 
 public class BarrelSelector extends SubsystemBase {
   /** Creates a new BarrelSelector. */
   // The currently selected barrel. Not the Barrel ID. :(
   public int cur_barrel;
-  public BarrelSelector() {
+  private Barrel[] m_barrels;
+  
+  public BarrelSelector(Shooter shooter) {
     cur_barrel = 0;
+    m_barrels = shooter.getArray();
   }
+
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("Current Barrel", cur_barrel);
+    SmartDashboard.putNumber("Current Barrel", cur_barrel); 
   }
   // Increment the selected barrel.
   public Command up() {
@@ -44,6 +52,16 @@ public class BarrelSelector extends SubsystemBase {
           cur_barrel--;
         }
       }
+    );
+  }
+  // Fire the selected barrel. Hopefully. Please, please, please.
+  public Command fireCurBarrel() {
+    
+    return runOnce(() -> 
+      m_barrels[cur_barrel].set(true)
+      // m_barrels[cur_barrel].set(true)
+      .andThen(new WaitCommand(BarrelConstants.barrelWaitTime))
+      .andThen(m_barrels[cur_barrel].set(false))
     );
   }
 }

@@ -12,10 +12,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Barrel extends SubsystemBase {
   /** Creates a new Barrel. */
-  private final Solenoid m_solenoid_1;
+  private final Solenoid m_solenoid;
+  private int sol_id;
   
   public Barrel(int solenoid_id) {
-    m_solenoid_1 = new Solenoid(PneumaticsModuleType.REVPH, solenoid_id);
+    m_solenoid = new Solenoid(PneumaticsModuleType.CTREPCM, solenoid_id);
+    sol_id = solenoid_id;
   }
 
   @Override
@@ -25,7 +27,7 @@ public class Barrel extends SubsystemBase {
 
   // Set the state of the Barrel
   public Command set(Boolean state) {
-    return runOnce(() -> m_solenoid_1.set(state)); 
+    return runOnce(() -> {m_solenoid.set(state);System.out.println(sol_id);}); 
   }
   
 }
