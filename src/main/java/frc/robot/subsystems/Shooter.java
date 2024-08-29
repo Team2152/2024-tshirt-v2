@@ -4,9 +4,6 @@
 
 package frc.robot.subsystems;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Shooter extends SubsystemBase {
@@ -16,9 +13,9 @@ public class Shooter extends SubsystemBase {
   public final Barrel m_barrel_3;
 
   public Shooter() {
-    m_barrel_1 = new Barrel(1);
-    m_barrel_2 = new Barrel(2);
-    m_barrel_3 = new Barrel(3);
+    m_barrel_1 = new Barrel(0);
+    m_barrel_2 = new Barrel(1);
+    m_barrel_3 = new Barrel(2);
     // Old list stuff that dont matter because it stupid/jk
     // List<Barrel> m_barrels = new ArrayList<>();
     // m_barrels.add(m_barrel_1);

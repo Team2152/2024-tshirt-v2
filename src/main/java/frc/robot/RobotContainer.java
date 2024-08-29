@@ -4,20 +4,11 @@
 
 package frc.robot;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.IntSupplier;
-
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import frc.robot.subsystems.Barrel;
 import frc.robot.subsystems.BarrelSelector; //idk
 import frc.robot.subsystems.Shooter;
-
-import frc.robot.Constants;
-import frc.robot.Constants.BarrelConstants;
 
 public class RobotContainer {
   private Shooter m_shooter;

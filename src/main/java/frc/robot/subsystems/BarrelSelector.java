@@ -4,10 +4,9 @@
 
 package frc.robot.subsystems;
 
-import java.util.function.IntSupplier;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants.BarrelConstants;
@@ -56,12 +55,10 @@ public class BarrelSelector extends SubsystemBase {
   }
   // Fire the selected barrel. Hopefully. Please, please, please.
   public Command fireCurBarrel() {
-    
-    return runOnce(() -> 
-      m_barrels[cur_barrel].set(true)
-      // m_barrels[cur_barrel].set(true)
-      .andThen(new WaitCommand(BarrelConstants.barrelWaitTime))
-      .andThen(m_barrels[cur_barrel].set(false))
+    return new SequentialCommandGroup(
+      runOnce(() -> m_barrels[cur_barrel].set(true)),
+      new WaitCommand(BarrelConstants.barrelWaitTime),
+      runOnce(() -> m_barrels[cur_barrel].set(false))
     );
   }
 }
